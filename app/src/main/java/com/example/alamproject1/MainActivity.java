@@ -11,6 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -55,6 +56,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
+
+    RecyclerView rcv;
+
+    //map
     MarkerOptions myMarker;
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -87,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rcv = (RecyclerView)findViewById(R.id.recyclerView);
+        rcv.setLayoutManager(new LinearLayoutManager(this));
+
+        String arr[] = {"마이페이지", "테마설정", "오류신고"};
+        rcv.setAdapter(new mainAdaper(arr));
 
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout2);
         NavigationView navigationView = findViewById(R.id.navigationView);
